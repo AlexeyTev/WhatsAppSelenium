@@ -38,23 +38,23 @@ public class Program extends JPanel {
         success.setText("");
         success.setForeground(Color.GREEN);
         success.setBounds(575, 460, 800, 40);
-        success.setFont(new Font("Arial", Font.BOLD, 14));
         success.setVisible(true);
         this.add(success);
     }
 
     public void loginProcess() {
         this.loginButton = new JButton("Log on WhatApp");
-        this.loginButton.setBounds(570, 60, 175, 50);
+        this.loginButton.setBounds(300, 60, 175, 50);
         this.loginButton.setVisible(true);
         this.add(loginButton);
         this.loginButton.addActionListener(e -> {
             window.openChrome();
             addSuccessLogin();
+            this.loginButton.setVisible(false);
         });
     }
     public void addSuccessLogin() {
-        success.setText("Login Succeed!");
+        success.setText("Login Successful!");
         this.window.createTextBox();
     }
     public void paintComponent(Graphics graphics) {
