@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Window extends JFrame {//
     private static final int WIDTH = 800;
@@ -98,7 +101,6 @@ public class Window extends JFrame {//
         }).start();
     }
 
-
     public void openChrome() {
         System.setProperty("webdriver.openqa.driver", "chrome/chromedriver.exe");
         chromeDriver = new ChromeDriver();
@@ -114,5 +116,34 @@ public class Window extends JFrame {//
             } catch (Exception e) {
             }
         }
+    }
+
+    public void aboutWindow() {
+        JFrame aboutWindow = new JFrame("About");
+        aboutWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        aboutWindow.setLayout(new FlowLayout());
+
+        String text = "This application is intended to be an automated system for sending Whatsapp messages using SELENIUM," + "\n";
+        text += " as a practical part of the first degree studies in computer science" + "\n";
+        text += "Developed by: Alexey Teverovsky, Kesem Khalis, Elon Siboni, Shimon Digilov." + "\n";
+        text += "All rights reserved 2023 ©";
+        JTextArea textArea = new JTextArea(text);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(400, 200));
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                aboutWindow.dispose();
+            }
+        });
+
+        aboutWindow.add(scrollPane);
+        aboutWindow.add(closeButton);
+        aboutWindow.pack();
+        aboutWindow.setLocationRelativeTo(null);
+        aboutWindow.setVisible(true);
     }
 }
