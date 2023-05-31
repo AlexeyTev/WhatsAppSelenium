@@ -1,18 +1,16 @@
 package org.example;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
-public class Window extends JFrame {//
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+public class Window extends JFrame {
+
     private Program program;
     private TextBox textBox;
     private ChromeDriver chromeDriver;
@@ -22,28 +20,35 @@ public class Window extends JFrame {//
     public Window() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(WIDTH, HEIGHT);
-        this.setVisible(true);
+        this.setSize(Constants.APP_WIDTH, Constants.APP_HEIGHT);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setTitle("WhatsappBOT");
+        this.setVisible(true);
+
+
         createProgram();
     }
+
+
 
     public void createProgram() {
         program = new Program(this);
         this.add(program);
-        program.setBounds(0, 0, WIDTH, HEIGHT);
+        program.setBounds(0, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
         program.setVisible(true);
 
     }
+
+
 
     public void createTextBox() {
         this.textBox = new TextBox(this);
         this.add(textBox);
         this.textBox.setBounds(535, 160, 200, 300);
-        this.textBox.setVisible(true);
         this.textBox.requestFocus();
+        this.textBox.setVisible(true);
+
     }
 
     public void openConversation(String phoneNumber, String textMessage) {
@@ -122,12 +127,7 @@ public class Window extends JFrame {//
         JFrame aboutWindow = new JFrame("About");
         aboutWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         aboutWindow.setLayout(new FlowLayout());
-
-        String text = "This application is intended to be an automated system for sending Whatsapp messages using SELENIUM," + "\n";
-        text += " as a practical part of the first degree studies in computer science" + "\n";
-        text += "Developed by: Alexey Teverovsky, Kesem Khalis, Elon Siboni, Shimon Digilov." + "\n";
-        text += "All rights reserved 2023 ©";
-        JTextArea textArea = new JTextArea(text);
+        JTextArea textArea = new JTextArea(Constants.ABOUT_TEXT);
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
@@ -146,4 +146,6 @@ public class Window extends JFrame {//
         aboutWindow.setLocationRelativeTo(null);
         aboutWindow.setVisible(true);
     }
+
+
 }

@@ -43,7 +43,7 @@ public class Program extends JPanel {
     }
 
     public void loginProcess() {
-        this.loginButton = new JButton("Log on WhatApp");
+        this.loginButton = new JButton("Log on");
         this.loginButton.setBounds(Constants.LOGIN_PROCESS_BUTTON_X, Constants.LOGIN_PROCESS_BUTTON_Y, Constants.LOGIN_PROCESS_BUTTON_WIDTH, Constants.LOGIN_PROCESS_BUTTON_HEIGHT);
         this.loginButton.setBackground(Constants.BUTTONS_COLOR);
         this.loginButton.setBorder(BorderFactory.createLineBorder(Constants.BUTTONS_BORDER_COLOR));
@@ -60,7 +60,7 @@ public class Program extends JPanel {
         this.aboutButton = new JButton("About");
         this.aboutButton.setBounds(Constants.LOGIN_PROCESS_BUTTON_X, Constants.LOGIN_PROCESS_BUTTON_Y + 50, Constants.LOGIN_PROCESS_BUTTON_WIDTH, Constants.LOGIN_PROCESS_BUTTON_HEIGHT);
         this.aboutButton.setBackground(Constants.BUTTONS_COLOR);
-        this.loginButton.setBorder(BorderFactory.createLineBorder(Constants.BUTTONS_BORDER_COLOR));
+        this.aboutButton.setBorder(BorderFactory.createLineBorder(Constants.BUTTONS_BORDER_COLOR));
         this.aboutButton.setVisible(true);
         this.add(aboutButton);
         this.aboutButton.addActionListener(e -> {
