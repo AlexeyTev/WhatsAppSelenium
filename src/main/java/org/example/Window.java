@@ -61,7 +61,7 @@ public class Window extends JFrame {//
 
         }
         try {
-            Thread.sleep(100);
+            Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
             sendMessage2 = chromeDriver.findElement(By.xpath("//*[@id=\"pane-side\"]/div[1]/div/span"));
         } catch (Exception e) {
 
@@ -78,7 +78,7 @@ public class Window extends JFrame {//
                 checkSentMessage();
                 System.out.println("second try");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -87,7 +87,7 @@ public class Window extends JFrame {//
     }
 
     public void checkSentMessage() {
-        new Thread(()->{
+        new Thread(() -> {
             WebElement checkV = chromeDriver.findElement(By.cssSelector("span[data-testid='msg-dblcheck']"));
             String status = checkV.getAttribute("aria-label");
             System.out.println("Good luck");
@@ -100,11 +100,10 @@ public class Window extends JFrame {//
     }
 
 
-
     public void openChrome() {
         System.setProperty("webdriver.openqa.driver", "chrome/chromedriver.exe");
         chromeDriver = new ChromeDriver();
-        chromeDriver.get("https://web.whatsapp.com/");
+        chromeDriver.get(Constants.WHATSAPP_LINK);
         chromeDriver.manage().window().maximize();
         WebElement searchBox;
         while (true) {
