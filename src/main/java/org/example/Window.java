@@ -1,15 +1,16 @@
 package org.example;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
-public class Window extends JFrame {//
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+public class Window extends JFrame {
+
     private Program program;
     private TextBox textBox;
     private ChromeDriver chromeDriver;
@@ -19,49 +20,55 @@ public class Window extends JFrame {//
     public Window() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(WIDTH, HEIGHT);
-        this.setVisible(true);
+        this.setSize(Constants.APP_WIDTH, Constants.APP_HEIGHT);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setTitle("WhatsappBOT");
+        this.setVisible(true);
+
+
         createProgram();
     }
+
+
 
     public void createProgram() {
         program = new Program(this);
         this.add(program);
-        program.setBounds(0, 0, WIDTH, HEIGHT);
+        program.setBounds(0, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
         program.setVisible(true);
 
     }
+
+
 
     public void createTextBox() {
         this.textBox = new TextBox(this);
         this.add(textBox);
         this.textBox.setBounds(535, 160, 200, 300);
-        this.textBox.setVisible(true);
         this.textBox.requestFocus();
+        this.textBox.setVisible(true);
+
     }
 
     public void openConversation(String phoneNumber, String textMessage) {
-        search = chromeDriver.findElement(By.xpath("//*[@id=\"side\"]/div[1]/div/div/div[2]/div/div[1]/p"));
-        search.sendKeys(phoneNumber);
-        search.sendKeys(Keys.ENTER);
+
+        this.chromeDriver.get(Constants.WHATSAPP_CONV_LINK + phoneNumber);
         try {
-            Thread.sleep(100);
+            Thread.sleep(Constants.OPEN_CONV_THREAD_SLEEP_IN_MILLIS);
         } catch (Exception f) {
         }
 
         WebElement sendMessage1 = null;
         WebElement sendMessage2 = null;
         try {
-            Thread.sleep(100);
+            Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
             sendMessage1 = chromeDriver.findElement(By.xpath("//*[@id=\"main\"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p"));
         } catch (Exception e) {
 
         }
         try {
-            Thread.sleep(100);
+            Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
             sendMessage2 = chromeDriver.findElement(By.xpath("//*[@id=\"pane-side\"]/div[1]/div/span"));
         } catch (Exception e) {
 
@@ -78,7 +85,7 @@ public class Window extends JFrame {//
                 checkSentMessage();
                 System.out.println("second try");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -87,7 +94,7 @@ public class Window extends JFrame {//
     }
 
     public void checkSentMessage() {
-        new Thread(()->{
+        new Thread(() -> {
             WebElement checkV = chromeDriver.findElement(By.cssSelector("span[data-testid='msg-dblcheck']"));
             String status = checkV.getAttribute("aria-label");
             System.out.println("Good luck");
@@ -99,12 +106,10 @@ public class Window extends JFrame {//
         }).start();
     }
 
-
-
     public void openChrome() {
         System.setProperty("webdriver.openqa.driver", "chrome/chromedriver.exe");
         chromeDriver = new ChromeDriver();
-        chromeDriver.get("https://web.whatsapp.com/");
+        chromeDriver.get(Constants.WHATSAPP_LINK);
         chromeDriver.manage().window().maximize();
         WebElement searchBox;
         while (true) {
@@ -117,4 +122,30 @@ public class Window extends JFrame {//
             }
         }
     }
+
+    public void aboutWindow() {
+        JFrame aboutWindow = new JFrame("About");
+        aboutWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        aboutWindow.setLayout(new FlowLayout());
+        JTextArea textArea = new JTextArea(Constants.ABOUT_TEXT);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(400, 200));
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                aboutWindow.dispose();
+            }
+        });
+
+        aboutWindow.add(scrollPane);
+        aboutWindow.add(closeButton);
+        aboutWindow.pack();
+        aboutWindow.setLocationRelativeTo(null);
+        aboutWindow.setVisible(true);
+    }
+
+
 }
