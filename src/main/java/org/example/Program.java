@@ -88,16 +88,12 @@ public class Program extends JPanel {
         statusMessage.setVisible(true);
         this.add(statusMessage);
         switch (status) {
-            case "נשלחה":
-                v = "v";
-                break;
-            case "נמסרה":
-                v = "vv";
-                break;
+            case "נשלחה" -> v = "v";
+            case "נמסרה" -> v = "vv";
         }
         JLabel statusV = new JLabel(v);
         statusV.setForeground(Color.GRAY);
-        statusV.setBounds(30, 80, 50, 30);
+        statusV.setBounds(100, 80, 50, 30);
         if (status.equals("נקראה"))
             statusV.setForeground(Color.BLUE);
         statusV.setVisible(true);

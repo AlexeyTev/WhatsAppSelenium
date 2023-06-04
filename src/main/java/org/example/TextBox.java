@@ -37,8 +37,6 @@ public class TextBox extends JPanel {
         phoneNumberTF.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
                 try {
-                    String text = phoneNumberTF.getText();
-                    long value = Long.parseLong(phoneNumberTF.getText());
                     if (phoneNumberTF.getText().startsWith("05") && phoneNumberTF.getText().length() == 10) {
                         String temp = "9725" + phoneNumberTF.getText().substring(2);
                         phoneNumberTF.setText(temp);
@@ -79,27 +77,21 @@ public class TextBox extends JPanel {
     }
 
     public boolean validPhone(String phoneNumber) {
+        boolean check = false;
         long length = phoneNumber.length();
         if (length == 12 && phoneNumber.startsWith("9725")) {
-            return true;
+            check=true;
         }
         if (length == 11 && phoneNumber.startsWith("05") && phoneNumber.charAt(3) == '-') {
-            return true;
+            check=true;
         }
         if (length == 10 && phoneNumber.startsWith("05")) {
-            return true;
+            check=true;
         }
-        return false;
+        return check;
     }
 
 
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public String getTextMessage() {
-//        return textMessage;
-//    }
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);

@@ -5,9 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Objects;
+
 
 public class Window extends JFrame {
 
@@ -48,7 +46,6 @@ public class Window extends JFrame {
         this.textBox.setBounds(535, 160, 200, 300);
         this.textBox.requestFocus();
         this.textBox.setVisible(true);
-
     }
 
     public void openConversation(String phoneNumber, String textMessage) {
@@ -81,9 +78,7 @@ public class Window extends JFrame {
             if (sendMessage1 != null) {
                 sendMessage1.sendKeys(textMessage);
                 sendMessage1.sendKeys(Keys.ENTER);
-                System.out.println("first try");
                 checkSentMessage();
-                System.out.println("second try");
                 try {
                     Thread.sleep(Constants.TENTH_OF_SECOND_IN_MILLIS);
                 } catch (InterruptedException e) {
@@ -98,7 +93,7 @@ public class Window extends JFrame {
             WebElement checkV = chromeDriver.findElement(By.cssSelector("span[data-testid='msg-dblcheck']"));
             String status = checkV.getAttribute("aria-label");
             System.out.println("Good luck");
-            if (status.contains("נשלחה")) {
+            if (status.equals("נמסרה ")) {
                 JOptionPane.showMessageDialog(null, "The message was successfully sent", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
             this.program.addStatusMessage(status);
@@ -134,11 +129,7 @@ public class Window extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(400, 200));
         JButton closeButton = new JButton("Close");
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                aboutWindow.dispose();
-            }
-        });
+        closeButton.addActionListener(e -> aboutWindow.dispose());
 
         aboutWindow.add(scrollPane);
         aboutWindow.add(closeButton);
