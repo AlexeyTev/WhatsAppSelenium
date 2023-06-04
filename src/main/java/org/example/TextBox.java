@@ -18,6 +18,7 @@ public class TextBox extends JPanel {
                 BorderFactory.createEmptyBorder(10, 5, 2, 5)));
         JLabel message = new JLabel("Message: ");
         message.setBounds(20, 20, 120, 15);
+        message.setVisible(true);
         this.add(message);
 
         JTextArea textArea = new JTextArea();
@@ -25,13 +26,16 @@ public class TextBox extends JPanel {
         this.add(textArea);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+        textArea.setVisible(true);
 
         JLabel phoneNumberLable = new JLabel("Phone Number: ");
         phoneNumberLable.setBounds(20, 165, 120, 15);
+        phoneNumberLable.setVisible(true);
         this.add(phoneNumberLable);
 
         JTextField phoneNumberTF = new JTextField();
         phoneNumberTF.setBounds(20, 190, 150, 20);
+        phoneNumberTF.setVisible(true);
         this.add(phoneNumberTF);
 
         phoneNumberTF.addKeyListener(new KeyAdapter() {
