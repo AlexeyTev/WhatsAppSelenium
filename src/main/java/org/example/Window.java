@@ -43,7 +43,7 @@ public class Window extends JFrame {
     public void createTextBox() {
         this.textBox = new TextBox(this);
         this.add(textBox);
-        this.textBox.setBounds(535, 160, 200, 300);
+        this.textBox.setBounds(535, 100, 200, 300);
         this.textBox.requestFocus();
         this.textBox.setVisible(true);
     }
@@ -90,14 +90,18 @@ public class Window extends JFrame {
 
     public void checkSentMessage() {
         new Thread(() -> {
-            WebElement checkV = chromeDriver.findElement(By.cssSelector("span[data-testid='msg-dblcheck']"));
-            String status = checkV.getAttribute("aria-label");
-            System.out.println("Good luck");
-            if (status.equals("נמסרה ")) {
-                JOptionPane.showMessageDialog(null, "The message was successfully sent", "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
-            this.program.addStatusMessage(status);
-            System.out.println(status);
+           while (true){
+               WebElement checkV = chromeDriver.findElement(By.cssSelector("span[data-testid='msg-dblcheck']"));
+               String status = checkV.getAttribute("aria-label");
+               System.out.println("Good luck");
+               if (status.equals("נמסרה ")) {
+                   JOptionPane.showMessageDialog(null, "The message was successfully sent", "Message", JOptionPane.INFORMATION_MESSAGE);
+               } else if (status.equals(" נקראה ")) {
+
+               }
+               this.program.addStatusMessage(status);
+               System.out.println(status);
+           }
         }).start();
     }
 

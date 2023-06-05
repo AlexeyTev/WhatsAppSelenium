@@ -18,7 +18,7 @@ public class Constants {
     public static final int STATUS_MASSAGE_BUTTON_HEIGHT = 30;
     public static final int TENTH_OF_SECOND_IN_MILLIS = 100;
     public static final String WHATSAPP_LINK = "https://web.whatsapp.com/";
-    public static final int OPEN_CONV_THREAD_SLEEP_IN_MILLIS = 5000;
+    public static final int OPEN_CONV_THREAD_SLEEP_IN_MILLIS = 7000;
     public static final String WHATSAPP_CONV_LINK = "https://web.whatsapp.com/send?phone=";
     public static final Color BUTTONS_COLOR = Color.GRAY;
     public static final Color BUTTONS_BORDER_COLOR = Color.GREEN;
